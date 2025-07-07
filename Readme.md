@@ -116,6 +116,16 @@ npm start
 
   The Express philosophy is to provide small, robust tooling for HTTP servers, making
   it a great solution for single page applications, websites, hybrids, or public
+
+### Encrypted Cookies
+
+`res.cookie()` supports an `encrypt` option for encrypting cookies.  This requires a `secret` option to be provided, which will be used as the encryption key.
+
+```javascript
+res.cookie('name', 'value', { encrypt: true, secret: 'your-secret-key' });
+```
+
+This feature is useful for enhanced security, especially in development environments.
   HTTP APIs.
 
   Express does not force you to use any specific ORM or template engine. With support for over
