@@ -538,5 +538,38 @@ describe('app', function(){
       .get('/')
       .expect(200, 'saw GET / through /', done);
     })
+
+<<<<<<< HEAD
+  it('should not mount at //', function (done) {
+    var router = express.Router();
+    var app = express();
+
+    router.get('/', function (req, res) {
+      res.send('mounted');
+    });
+
+    app.use('//', router);
+
+    request(app)
+      .get('/')
+      .expect(404, done);
+  });
+=======
+
+it('should not mount at //', function (done) {
+  var router = express.Router();
+  var app = express();
+
+  router.get('/', function (req, res) {
+    res.send('mounted');
+  });
+
+  app.use('/', router);
+
+  request(app)
+    .get('/')
+    .expect(200, 'mounted', done);
+});
+>>>>>>> bef84b8 (Fix: Correctly mount router at root path (#25))
   })
 })
