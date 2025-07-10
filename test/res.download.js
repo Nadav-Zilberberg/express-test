@@ -53,6 +53,21 @@ describe('res', function(){
         .set('Range', 'bytes=0-2')
         .expect('Content-Range', 'bytes 0-2/20')
         .expect(206, '<p>', done)
+  it('should handle /proc files', function (done) {
+    var app = express()
+
+    app.get('/', function (req, res) {
+      res.download('/proc/version')
+    })
+
+    request(app)
+      .get('/')
+      .expect(200, function(err, res) {
+        if (err) return done(err)
+        assert(res.text.length > 0, '/proc/version should not be empty')
+        done()
+      })
+  })
     })
   })
 
