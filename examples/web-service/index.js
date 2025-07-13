@@ -28,7 +28,8 @@ function error(status, msg) {
 // will cause this middleware to be invoked
 
 app.use('/api', function(req, res, next){
-  var key = req.query['api-key'];
+  const query = { ...req.query };
+  var key = query['api-key'];
 
   // key isn't present
   if (!key) return next(error(400, 'api key required'));
