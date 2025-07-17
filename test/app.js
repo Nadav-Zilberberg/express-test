@@ -1,3 +1,13 @@
+app.use(function(req, res, next) {
+  if (req.query.pretty_output) {
+    const originalJson = res.json;
+    res.json = function(body) {
+      res.setHeader('Content-Type', 'application/json');
+      originalJson.call(res, body, null, 2);
+    };
+  }
+  next();
+});
 'use strict'
 
 var assert = require('node:assert')
